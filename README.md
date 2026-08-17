@@ -15,8 +15,8 @@ Android; an iPhone may share a verified APK or installation URL but cannot silen
 
 ## Public endpoints
 
-- Catalog: `https://raw.githubusercontent.com/IsaiahDupree/4runner-vhos-release-hub/main/catalog/v1/releases.json`
-- Detached signature: append `.sig` to the catalog URL
+- Catalog: `https://github.com/IsaiahDupree/4runner-vhos-release-hub/releases/latest/download/releases.json`
+- Detached signature: append `.sig` to the catalog filename
 - Portal: `https://isaiahdupree.github.io/4runner-vhos-release-hub/`
 
 The detached signature is P-256 ECDSA over the exact catalog bytes. Consumers pin the development
