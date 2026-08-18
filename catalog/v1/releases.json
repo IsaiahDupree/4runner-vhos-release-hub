@@ -1,27 +1,27 @@
 {
   "contract": "vhos.release-catalog",
   "contract_version": "1.0.0",
-  "catalog_id": "9DA9D04B-2FB4-400E-8784-280948050016",
-  "generated_at": "2026-08-18T02:39:04Z",
+  "catalog_id": "170AB43A-9F5E-432E-B35B-FE0EC8D98DF7",
+  "generated_at": "2026-08-18T03:42:18Z",
   "artifacts": [
     {
-      "artifact_id": "android-head-unit-0.1.0-dev.4",
+      "artifact_id": "android-head-unit-0.1.0-dev.5",
       "target": "ANDROID_HEAD_UNIT",
       "kind": "ANDROID_APK",
-      "version": "0.1.0-dev.4",
+      "version": "0.1.0-dev.5",
       "channel": "DEVELOPMENT",
-      "published_at": "2026-08-18T02:37:03Z",
+      "published_at": "2026-08-18T03:41:54Z",
       "source_repository": "https://github.com/IsaiahDupree/4runner-vhos-android",
-      "source_commit": "520d02805ca77236b886a2397676bed7b644b484",
-      "download_url": "https://github.com/IsaiahDupree/4runner-vhos-android/releases/download/android-v0.1.0-dev.4/app-debug.apk",
-      "sha256": "d0cbc595634b5459e215c0c3c94f6e317fef1f15cf4a81030a0c0f10d527a0da",
-      "byte_count": 2644784,
+      "source_commit": "c414e3789670273ce5732cd8b737c82264cef29a",
+      "download_url": "https://github.com/IsaiahDupree/4runner-vhos-android/releases/download/android-v0.1.0-dev.5/app-debug.apk",
+      "sha256": "6a96cee019085eaf1cf02fbab6cb43257fda8ad5a81068e4aed36f3b430aa3be",
+      "byte_count": 2657928,
       "install_method": "ANDROID_PACKAGE_INSTALLER",
       "readiness": "AVAILABLE",
-      "release_notes": "Development head-unit build aligned with the proven single encrypted ESP32 stream; imports iPhone VHOS sync bundles append-only and materializes CRC-valid, listen-only persistent CAN records for head-unit analysis. A/C BLE transport is not yet available.",
+      "release_notes": "Android 13/API 33 recovery build for the existing head-unit hardware: reconnects directly to the last CRC-handshake-validated gateway, uses bounded service-filtered scan windows with named stack errors and exponential cooldown, serializes GATT startup, and preserves explicit Android/iPhone ownership. A/C BLE transport is not yet available.",
       "android": {
         "package_id": "dev.vhos.headunit",
-        "version_code": 4,
+        "version_code": 5,
         "signing_certificate_sha256": "68488e78beca1a8c1245cbb964b95e2bcf2a0c83b674777eed12690d98e8fad1",
         "debug_signed": true
       }
