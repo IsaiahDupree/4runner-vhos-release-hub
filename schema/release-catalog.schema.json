@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://releases.vhos.dev/schema/release-catalog-v1.json",
+  "title": "VHOS Release Catalog v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract", "contract_version", "catalog_id", "generated_at", "artifacts"],
+  "properties": {
+    "contract": {"const": "vhos.release-catalog"},
+    "contract_version": {"const": "1.0.0"},
+    "catalog_id": {"type": "string", "format": "uuid"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "artifacts": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {"$ref": "#/$defs/artifact"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_id", "target", "kind", "version", "channel", "published_at", "source_repository", "source_commit", "download_url", "sha256", "byte_count", "install_method", "readiness", "release_notes"],
+      "properties": {
+        "artifact_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,119}$"},
+        "target": {"enum": ["ANDROID_HEAD_UNIT", "ESP32_OBD_GATEWAY", "ESP32_AC_SENSOR_NODE"]},
+        "kind": {"enum": ["ANDROID_APK", "ESP32_VHOSOTA", "ESP32_MERGED_RECOVERY"]},
+        "version": {"type": "string", "minLength": 1, "maxLength": 80},
+        "channel": {"enum": ["DEVELOPMENT", "BETA", "STABLE"]},
+        "published_at": {"type": "string", "format": "date-time"},
+        "source_repository": {"type": "string", "format": "uri", "pattern": "^https://github\\.com/"},
+        "source_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "download_url": {"type": "string", "format": "uri", "pattern": "^https://github\\.com/"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "byte_count": {"type": "integer", "minimum": 1, "maximum": 134217728},
+        "install_method": {"enum": ["ANDROID_PACKAGE_INSTALLER", "MOBILE_TO_ESP32_AUTHENTICATED_WIFI", "USB_SERIAL_INITIAL_FLASH"]},
+        "readiness": {"enum": ["AVAILABLE", "SAFETY_GATED", "RECOVERY_ONLY"]},
+        "release_notes": {"type": "string", "minLength": 1, "maxLength": 1000},
+        "android": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["package_id", "version_code", "signing_certificate_sha256", "debug_signed"],
+          "properties": {
+            "package_id": {"const": "dev.vhos.headunit"},
+            "version_code": {"type": "integer", "minimum": 1},
+            "signing_certificate_sha256": {"$ref": "#/$defs/sha256"},
+            "debug_signed": {"type": "boolean"}
+          }
+        },
+        "esp32": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["chip_family", "hardware_revisions", "distribution_signature", "initial_flash_required"],
+          "properties": {
+            "chip_family": {"enum": ["ESP32", "ESP32-S3"]},
+            "hardware_revisions": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+            "distribution_signature": {"enum": ["ED25519", "NONE_RECOVERY_CHECKSUM_ONLY"]},
+            "initial_flash_required": {"type": "boolean"}
+          }
+        }
+      },
+      "allOf": [
+        {"if": {"properties": {"kind": {"const": "ANDROID_APK"}}}, "then": {"required": ["android"]}},
+        {"if": {"properties": {"target": {"pattern": "^ESP32_"}}}, "then": {"required": ["esp32"]}}
+      ]
+    }
+  }
+}

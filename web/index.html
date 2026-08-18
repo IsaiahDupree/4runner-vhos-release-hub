@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>4Runner VHOS Release Hub</title>
+  <style>
+    :root { color-scheme: dark; font-family: ui-sans-serif, system-ui, sans-serif; background:#08111f; color:#eaf2ff }
+    body { max-width:1050px; margin:0 auto; padding:40px 20px 80px }
+    h1 { font-size:clamp(2rem,6vw,4rem); margin:.15em 0 }
+    .lede { color:#a9bdd7; max-width:760px; line-height:1.6 }
+    #status { margin:28px 0; color:#7dd3fc }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px }
+    article { border:1px solid #24415f; border-radius:18px; padding:20px; background:#0d1b2d }
+    .tag { display:inline-block; padding:4px 9px; border-radius:999px; background:#17334f; color:#9ed8ff; font-size:.78rem }
+    .warn { color:#fdba74 }
+    dl { display:grid; grid-template-columns:auto 1fr; gap:7px 12px; font-size:.9rem }
+    dt { color:#8298b2 } dd { margin:0; overflow-wrap:anywhere }
+    a.button { display:inline-block; margin-top:12px; padding:10px 14px; border-radius:10px; background:#1593e7; color:white; text-decoration:none; font-weight:700 }
+    code { font-size:.75rem }
+  </style>
+</head>
+<body>
+  <p class="tag">Public development catalog</p>
+  <h1>4Runner Vehicle Health OS</h1>
+  <p class="lede">Target-specific Android and ESP32 builds. Downloads are verified again by the mobile apps; this page does not bypass Android installation approval or ESP32 safety gates.</p>
+  <div id="status">Loading signed release metadata…</div>
+  <main class="grid" id="releases"></main>
+  <script>
+    const catalogURL = '../catalog/v1/releases.json';
+    const labels = {ANDROID_HEAD_UNIT:'Android head unit',ESP32_OBD_GATEWAY:'OBD/CAN ESP32',ESP32_AC_SENSOR_NODE:'A/C ESP32-S3'};
+    fetch(catalogURL).then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); }).then(c => {
+      document.querySelector('#status').textContent = `${c.artifacts.length} artifacts • generated ${c.generated_at} • app verification required`;
+      document.querySelector('#releases').replaceChildren(...c.artifacts.map(a => {
+        const node = document.createElement('article');
+        node.innerHTML = `<span class="tag">${a.channel}</span><h2>${labels[a.target]}</h2><p>${a.release_notes}</p><dl><dt>Version</dt><dd>${a.version}</dd><dt>State</dt><dd class="${a.readiness === 'AVAILABLE' ? '' : 'warn'}">${a.readiness}</dd><dt>Install</dt><dd>${a.install_method}</dd><dt>SHA-256</dt><dd><code>${a.sha256}</code></dd></dl><a class="button" href="${a.download_url}">Download verified target</a>`;
+        return node;
+      }));
+    }).catch(e => document.querySelector('#status').textContent = `Catalog unavailable: ${e.message}`);
+  </script>
+</body>
+</html>

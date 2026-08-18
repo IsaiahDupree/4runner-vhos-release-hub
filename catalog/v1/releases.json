@@ -1,0 +1,74 @@
+{
+  "contract": "vhos.release-catalog",
+  "contract_version": "1.0.0",
+  "catalog_id": "9DA9D04B-2FB4-400E-8784-280948050016",
+  "generated_at": "2026-08-18T02:39:04Z",
+  "artifacts": [
+    {
+      "artifact_id": "android-head-unit-0.1.0-dev.4",
+      "target": "ANDROID_HEAD_UNIT",
+      "kind": "ANDROID_APK",
+      "version": "0.1.0-dev.4",
+      "channel": "DEVELOPMENT",
+      "published_at": "2026-08-18T02:37:03Z",
+      "source_repository": "https://github.com/IsaiahDupree/4runner-vhos-android",
+      "source_commit": "520d02805ca77236b886a2397676bed7b644b484",
+      "download_url": "https://github.com/IsaiahDupree/4runner-vhos-android/releases/download/android-v0.1.0-dev.4/app-debug.apk",
+      "sha256": "d0cbc595634b5459e215c0c3c94f6e317fef1f15cf4a81030a0c0f10d527a0da",
+      "byte_count": 2644784,
+      "install_method": "ANDROID_PACKAGE_INSTALLER",
+      "readiness": "AVAILABLE",
+      "release_notes": "Development head-unit build aligned with the proven single encrypted ESP32 stream; imports iPhone VHOS sync bundles append-only and materializes CRC-valid, listen-only persistent CAN records for head-unit analysis. A/C BLE transport is not yet available.",
+      "android": {
+        "package_id": "dev.vhos.headunit",
+        "version_code": 4,
+        "signing_certificate_sha256": "68488e78beca1a8c1245cbb964b95e2bcf2a0c83b674777eed12690d98e8fad1",
+        "debug_signed": true
+      }
+    },
+    {
+      "artifact_id": "obd-gateway-mrdiy-0.1.0-dev.14",
+      "target": "ESP32_OBD_GATEWAY",
+      "kind": "ESP32_VHOSOTA",
+      "version": "0.1.0-dev.14",
+      "channel": "DEVELOPMENT",
+      "published_at": "2026-08-17T21:14:58Z",
+      "source_repository": "https://github.com/IsaiahDupree/4runner-vhos-firmware",
+      "source_commit": "d7ccfb45c178f1f88f4d7244e26c522cb878737b",
+      "download_url": "https://github.com/IsaiahDupree/4runner-vhos-firmware/releases/download/vhos-mrdiy-v0.1.0-dev.14/vhos-mrdiy-esp32-v13-v0.1.0-dev.14.vhosota",
+      "sha256": "06bea1c85b8b60a5cf67db096a3ce28f5096257071316bd6e33ee546678bdba7",
+      "byte_count": 1049240,
+      "install_method": "MOBILE_TO_ESP32_AUTHENTICATED_WIFI",
+      "readiness": "SAFETY_GATED",
+      "release_notes": "Signed A/B OTA package using the canonical VHOS-4R-OBD-<MAC suffix> identity; installation still requires fresh PARKED and supply evidence from the physical gateway.",
+      "esp32": {
+        "chip_family": "ESP32",
+        "hardware_revisions": ["MrDIY-CAN-SHIELD-v1.3+"],
+        "distribution_signature": "ED25519",
+        "initial_flash_required": false
+      }
+    },
+    {
+      "artifact_id": "ac-sensor-node-0.1.0-dev.1-recovery",
+      "target": "ESP32_AC_SENSOR_NODE",
+      "kind": "ESP32_MERGED_RECOVERY",
+      "version": "0.1.0-dev.1",
+      "channel": "DEVELOPMENT",
+      "published_at": "2026-08-16T00:00:00Z",
+      "source_repository": "https://github.com/IsaiahDupree/4runner-ac-telemetry-node",
+      "source_commit": "94f8d97a5c6070b074bcb70c530e9fed21ffeb51",
+      "download_url": "https://github.com/IsaiahDupree/4runner-ac-telemetry-node/releases/download/ac-v0.1.0-dev.1/vhos-ac-sensor-node-esp32s3-v0.1.0-dev.1-merged.bin",
+      "sha256": "5d451fa38dd5b03c45a0a15f5208539ab43720bdc282662f8b673706e07b7c17",
+      "byte_count": 264880,
+      "install_method": "USB_SERIAL_INITIAL_FLASH",
+      "readiness": "RECOVERY_ONLY",
+      "release_notes": "Empty recovery image only; BLE, sensor acquisition, and mobile OTA are intentionally absent.",
+      "esp32": {
+        "chip_family": "ESP32-S3",
+        "hardware_revisions": ["ESP32-S3-DEVELOPMENT-NODE"],
+        "distribution_signature": "NONE_RECOVERY_CHECKSUM_ONLY",
+        "initial_flash_required": true
+      }
+    }
+  ]
+}
