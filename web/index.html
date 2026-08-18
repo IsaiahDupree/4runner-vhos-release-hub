@@ -27,7 +27,7 @@
   <div id="status">Loading signed release metadata…</div>
   <main class="grid" id="releases"></main>
   <script>
-    const catalogURL = '../catalog/v1/releases.json';
+    const catalogURL = './catalog/v1/releases.json';
     const labels = {ANDROID_HEAD_UNIT:'Android head unit',ESP32_OBD_GATEWAY:'OBD/CAN ESP32',ESP32_AC_SENSOR_NODE:'A/C ESP32-S3'};
     fetch(catalogURL).then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); }).then(c => {
       document.querySelector('#status').textContent = `${c.artifacts.length} artifacts • generated ${c.generated_at} • app verification required`;
