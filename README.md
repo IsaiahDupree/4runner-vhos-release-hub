@@ -18,7 +18,7 @@ Android; an iPhone may share a verified APK or installation URL but cannot silen
 - Catalog: `https://github.com/IsaiahDupree/4runner-vhos-release-hub/releases/latest/download/releases.json`
 - Detached signature: append `.sig` to the catalog filename
 - Portal: `https://isaiahdupree.github.io/4runner-vhos-release-hub/`
-- Current Android APK: [`0.1.0-dev.15`](https://github.com/IsaiahDupree/4runner-vhos-android/releases/download/android-v0.1.0-dev.15/app-debug.apk) — 10,800,109 bytes; SHA-256 `92f205af71e48a98f95de625120ef86391602946a549df923440fbfaa71d9225`
+- Current Android APK: [`0.1.0-dev.16`](https://github.com/IsaiahDupree/4runner-vhos-android/releases/download/android-v0.1.0-dev.16/app-debug.apk) — 10,816,489 bytes; SHA-256 `8d8ba19061705d3c3901c749b1a0df1cb7c7c0e626c99676b7655e70441cc9a9`
 
 The detached signature is P-256 ECDSA over the exact catalog bytes. Consumers pin the development
 catalog public key from `trust/`; artifacts retain their own target trust checks as defense in
